@@ -1,0 +1,74 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Chatbot{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='chatbot.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <div class="mt-5" id="janela-chat">
+            <input type="text" id="mensagem-input" placeholder="Digite aqui uma pergunta para o bot...">
+            <button class="btn btn-light" style="border: 2px solid black;" id="mensagem-button" onclick="adicionaMensagemCliente()">Enviar</button>
+            <ul id="mensagens">
+                <div class="container-mensagem container-mensagem-bot">
+                    <li class="mensagem-bot">Olá, como posso ajudar?</li>
+                </div>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+
+        var input = document.getElementById("mensagem-input");
+
+        input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            document.getElementById("mensagem-button").click();
+        }
+        });
+
+        function adicionaMensagem(mensagem, tipoMensagem) {
+            let janelaChat = document.getElementById('janela-chat');
+            let containerMensagem = document.createElement('div');
+            let containerMensagens = document.getElementById('mensagens');
+
+            containerMensagem.setAttribute('class', 'container-mensagem container-mensagem-' + tipoMensagem);
+            containerMensagem.innerHTML = '<li class="mensagem-' + tipoMensagem + '">' + mensagem + '</li>';
+            containerMensagens.appendChild(containerMensagem);
+            janelaChat.scrollTop = janelaChat.scrollHeight;
+        }
+
+        function adicionaMensagemCliente() {
+            let mensagemInput = document.getElementById('mensagem-input');
+            let mensagem = mensagemInput.value;
+
+            if (mensagem.trim() != '') {
+                adicionaMensagem(mensagem, 'cliente');
+                adicionaMensagemBot(mensagem);
+            }
+
+            mensagemInput.value = '';
+        }
+
+        function adicionaMensagemBot(msg) {
+            let url = '{{ url_for("bot_response") }}';
+            let _data = {
+                mensagem: msg
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {"Content-type": "application/json;charset=UTF-8"},
+                body: JSON.stringify(_data)
+            })
+            .then(response => response.json())
+            .then(json => adicionaMensagem(json.resposta, 'bot'));
+        }
+
+    </script>
+
+{% endblock %}

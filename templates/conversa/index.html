@@ -1,0 +1,59 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Conversas Cadastradas{% endblock %}
+
+{% block content %}
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr id="titulo">
+                <th>ID</th>
+                <th>Pergunta</th>
+                <th>Respota</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for conversa in conversas %}
+            <tr>
+                <td>{{conversa.id}}</td>
+                <td>{{conversa.pergunta}}</td>
+                <td>{{conversa.resposta}}</td>
+                <td><button class="btn btn-outline-danger btn-sm" url="{{url_for('conversa_delete', id=conversa.id)}}" onclick="confirmarExclusao(this)">Excluir</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function confirmarExclusao(e) {
+
+            Swal.fire({
+                title: 'Deseja excluir esse registro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            }).then((resultado) => {
+                if (resultado.isConfirmed) {
+                    let deleteUrl = e.getAttribute('url')
+                    window.location.assign(deleteUrl)
+                }
+            });
+        }
+    </script>
+    {% if session['dados_excluidos'] %}
+        <!-- A linha abaixo está comentada em HTML para evitar que o valor da propriedade seja renderizado  -->
+        <!-- {{ session.pop('dados_excluidos') }} -->
+        <script>
+            Swal.fire({
+                title: 'Dados excluídos com sucesso!',
+                icon: 'success',
+            });
+        </script>
+    {% endif %}
+
+{% endblock %}

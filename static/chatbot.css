@@ -1,0 +1,65 @@
+#janela-chat {
+    background: rgb(41,107,215);
+    background: linear-gradient(90deg, rgba(41,107,215,1) 0%, rgba(33,62,103,1) 100%);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 500px;
+    width: 80%;
+    padding: 10px;
+    box-shadow: 5px 5px 20px 5px black;
+    border-radius: 25px;
+}
+
+#mensagens {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10%;
+}
+
+
+.mensagem-cliente {
+    color: rgb(255, 255, 255);
+}
+
+.mensagem-bot {
+    color: rgb(0, 0, 0);
+    text-align: left;
+}
+
+.container-mensagem {
+    display: block;
+    width: 45%;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.container-mensagem-bot {
+    background-color: rgb(221, 220, 220);
+}
+
+.container-mensagem-cliente {
+    background-color: rgb(46, 101, 204);
+    border: 1px solid white;
+    margin-left: 55%;
+}
+
+#mensagem-input {
+    background-color: rgb(174, 192, 219);
+    box-shadow: 5px 5px black;
+    color: black;
+    position: fixed;
+    border-radius: 25px;
+    padding: 1%;
+    width: 53%;
+    height: 7%;
+}
+
+#mensagem-button {
+    background-color: rgb(174, 192, 219);
+    box-shadow: 5px 5px black;
+    height: 7%;
+    margin-left: 55%;
+    position: fixed
+}

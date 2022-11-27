@@ -1,0 +1,111 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap');
+
+
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Balsamiq Sans;
+}
+
+#centro{
+    margin: auto;
+    width: 100%;
+}
+.centro-texto{
+    text-align: center;
+    margin-top:10px;
+ 
+    font-weight: bold;
+    font-size: 20px;
+}
+.form-check-label{
+    text-align: center;
+    margin-top:10px;
+    
+}
+.form-check-input{
+    text-align: center;
+    margin-bottom: 10px;
+   
+}
+img{
+    width: 100%;
+    position: absolute;
+}
+
+table{
+    font-size: 14px;
+    width: 90%;
+    margin: 20px auto;
+    border: 1px solid black;
+    line-height: 25px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+
+
+tr#titulo{
+    font-weight: bold;
+    color: #fff;
+    background-color: #0f93ff;
+}
+
+body{
+    background-image: url(bgLivros.png);
+    background-size: cover;
+    margin: 0px;
+}
+
+h2{
+    text-align: center;
+    color: white;
+}
+a:link{
+    text-decoration: none;
+    font-weight: bold;
+    border-width: 4px;
+    text-align: center;
+   
+  
+}
+
+label, input{
+    display: block;
+    line-height: 30px;
+    outline: none;
+    font-size: 12pt;
+    width: 99%;
+    color:#fff;
+    
+}
+
+form{
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 30px auto;
+    border-radius: 4px;
+ 
+}
+
+.titulo{
+    text-align: center;
+    color: rgb(255, 255, 255);
+
+}
+
+.fundo{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background-image:url("bgLivros.png") no-repeat;
+	background-size: cover;
+}
+
+::-webkit-input-placeholder{
+    color:	rgb(255, 255, 255);
+}
+::-webkit-input-placeholder{
+	color:	#808080; 
+}

@@ -1,0 +1,64 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Cadastrar Conversas{% endblock %}
+
+{% block content %}
+    <h1 class="titulo mt-3">Cadastre novas conversas para o bot</h1>
+    <form action="{{url_for('conversa_store')}}" method="post">
+        <div class="row" id="campos-1">
+            <div class="col-5">
+                <label for="pergunta">Pergunta:</label>
+                <input type="text" class="form-control" name="pergunta[]" autocomplete="off" required>
+            </div>
+            <div class="col-5">
+                <label for="resposta">Respota:</label>
+                <input type="text" class="form-control" name="resposta[]" autocomplete="off" required>
+            </div>
+        </div>
+        <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+        <a class="btn btn-success mt-3" onclick="adicionarCampos()">Adicionar outra conversa</a>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        var campos = 1;
+        function adicionarCampos() {
+
+            let elementoCampos = document.getElementById('campos-' + campos);
+            let novoElemento = elementoCampos.cloneNode(true);
+            novoElemento.removeChild(novoElemento.lastChild);
+            novoElemento.children[0].children[1].value = '';
+            novoElemento.children[1].children[1].value = '';
+
+            campos++;
+
+            let botaoRemocao = document.createElement('div');
+            botaoRemocao.className = 'col-2';
+            botaoRemocao.innerHTML = '<a class="btn btn-danger mt-4" onclick="removerCampos(' + campos + ')">Remover</a>';
+            novoElemento.appendChild(botaoRemocao);
+
+            novoElemento.id = 'campos-' + campos;
+            elementoCampos.after(novoElemento);
+        }
+
+        function removerCampos(numCampo) {
+            let elementoCampos = document.getElementById('campos-' + numCampo);
+            elementoCampos.remove();
+            campos--;
+        }
+
+    </script>
+    {% if session['dados_criados'] %}
+        <!-- {{ session.pop('dados_criados') }} -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: 'Dados salvos com sucesso!',
+                icon: 'success',
+                html: 'Para ver todas as conversas salvas <a class="btn btn-info" href={{url_for("conversa_index")}}>Clique Aqui</a>',
+                confirmButtonText: 'Sair'
+            });
+        </script>
+    {% endif %}
+{% endblock %}
